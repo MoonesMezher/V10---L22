@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(require("morgan")("dev"));
 
 app.get("/api/health", (req, res) => res.status(200).json("API is Healthy"))
+app.use("/api/v1/auth", require("./routes/auth.routes"))
 app.use("/api/v1/users", require("./routes/user.routes"))
 app.use("/api/v1/resturants", require("./routes/resturant.routes"))
 app.use("/api/v1/sections", require("./routes/section.routes"))

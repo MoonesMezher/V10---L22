@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     }, 
     phone: {
         type: String,
-        unique: true,
+        unique: [true, "Phone must be unique"],
         required: true
     }, 
     email: {
@@ -27,6 +27,14 @@ const userSchema = new mongoose.Schema({
         enum: ["customer", "driver", "resturant-owner"],
         default: "customer"
     },
+    /* blocked: { // true
+        type: Boolean,
+        default: false
+    },
+    countTries: { // 1, 2, 3, ,4 , 5
+        type: Number,
+        default: 0
+    } */
     /* profileId */
 }, { timestamps: true })
 
