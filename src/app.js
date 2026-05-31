@@ -4,9 +4,14 @@ const app = express();
 const { default: mongoose } = require("mongoose");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
+const cookies = require("cookie-parser");
+const { limiter } = require("./middlewares/limiter")
+
+app.use(limiter)
 
 app.use(express.json());
 app.use(require("morgan")("dev"));
+app.use(cookies());
 
 app.get("/api/health", (req, res) => res.status(200).json("API is Healthy"))
 app.use("/api/v1/auth", require("./routes/auth.routes"))

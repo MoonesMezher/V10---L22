@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const cookiesService = require("../utils/cookiesService");
 const jwtService = require("../utils/jwtService");
 const passwordService = require("../utils/passwordService");
 
@@ -27,15 +28,31 @@ class AuthController {
             return res.status(400).json("Invalid Data");
         }
 
-        const token = jwtService.sign({ _id: user._id, email: user.email });
+        const token = jwtService.sign({ 
+            _id: user._id, 
+            email: user.email, 
+            role: user.role
+        });
 
         user = user.toObject();
         delete user.password;
 
-        res.status(201).json({ user, token })
+        cookiesService.setData(res, "accessToken", token)
+
+        res.status(201).json({ user })
     }
     logout = async (req, res) => {
+        cookiesService.clearData(res, "accessToken")
         res.status(201).json("Logged out Successfully");
+    }
+    profile = async (req, res) => {
+        const userId = req._user._id;
+
+        const user = await User.findById(userId).select("-password");
+
+        res.status(200).json({
+            data: user
+        })
     }
 }
 
