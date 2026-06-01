@@ -46,13 +46,13 @@ class AuthController {
         res.status(201).json("Logged out Successfully");
     }
     profile = async (req, res) => {
-        const userId = req._user._id;
+        if (!req._user) {
+            return res.status(200).json({ data: null });
+        }
 
-        const user = await User.findById(userId).select("-password");
+        const user = await User.findById(req._user._id).select("-password");
 
-        res.status(200).json({
-            data: user
-        })
+        res.status(200).json({ data: user });
     }
 }
 

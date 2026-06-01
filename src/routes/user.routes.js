@@ -6,6 +6,7 @@ const id = require("../middlewares/id");
 const userController = require("../controllers/user.controller");
 const auth = require("../middlewares/auth");
 const role = require("../middlewares/role");
+const { deleteUserValidation } = require("../validation/users.validate");
 
 router.get("/", asyncHandler(userController.getAll))
 
@@ -15,6 +16,6 @@ router.post("/", [auth, role(["resturant-owner", "customer"])], asyncHandler(use
 
 router.put("/:id", [id], asyncHandler(userController.update))
 
-router.delete("/:id", [id], asyncHandler(userController.remove))
+router.delete("/:id", [...deleteUserValidation], asyncHandler(userController.remove))
 
 module.exports = router

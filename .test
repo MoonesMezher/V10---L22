@@ -1,0 +1,7 @@
+- Request -> Server -> Response
+
+- Server: 
+ - Middleware
+ - Route
+ - Controller -> Validation
+ - Database -> Validation

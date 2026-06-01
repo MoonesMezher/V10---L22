@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodHub — Order Food Online</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header class="navbar" id="navbar">
+            <div class="container navbar-inner">
+                <a href="#/" class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <span class="logo-text">FoodHub</span>
+                </a>
+                <nav class="nav-links" id="nav-links">
+                    <a href="#/" class="nav-link">Restaurants</a>
+                    <a href="#/orders" class="nav-link nav-auth">My Orders</a>
+                    <a href="#/cart" class="nav-link nav-auth">
+                        Cart
+                        <span class="cart-badge" id="cart-badge" hidden>0</span>
+                    </a>
+                    <a href="#/owner" class="nav-link nav-owner" hidden>Dashboard</a>
+                    <a href="#/driver" class="nav-link nav-driver" hidden>Deliveries</a>
+                </nav>
+                <div class="nav-actions" id="nav-actions">
+                    <a href="#/login" class="btn btn-ghost btn-sm" id="btn-login">Sign In</a>
+                    <a href="#/register" class="btn btn-primary btn-sm" id="btn-register">Sign Up</a>
+                    <div class="user-menu" id="user-menu" hidden>
+                        <button class="user-menu-btn" id="user-menu-btn">
+                            <span class="user-avatar" id="user-avatar">U</span>
+                            <span id="user-name">User</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2 4l4 4 4-4"/></svg>
+                        </button>
+                        <div class="user-dropdown" id="user-dropdown">
+                            <a href="#/profile">My Profile</a>
+                            <a href="#/orders">My Orders</a>
+                            <button id="btn-logout">Sign Out</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
+
+        <main id="main-content" class="main-content"></main>
+
+        <footer class="footer">
+            <div class="container footer-inner">
+                <div class="footer-brand">
+                    <span class="logo-icon">🍽️</span>
+                    <span>FoodHub</span>
+                </div>
+                <p>Delicious food delivered to your door. Browse restaurants, order your favorites, and track delivery in real time.</p>
+                <div class="footer-links">
+                    <a href="#/">Restaurants</a>
+                    <a href="#/orders">Orders</a>
+                    <a href="#/profile">Profile</a>
+                </div>
+                <p class="footer-copy">&copy; 2026 FoodHub. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+    <div class="modal-overlay" id="modal-overlay" hidden>
+        <div class="modal" id="modal"></div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

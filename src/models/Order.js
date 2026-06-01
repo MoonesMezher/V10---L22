@@ -17,8 +17,7 @@ const orderSchema = new mongoose.Schema({
     }, 
     driverId: {
         type: mongoose.Types.ObjectId,
-        ref: "User",
-        required: true
+        ref: "User"
     },
     resturantId: {
         type: mongoose.Types.ObjectId,

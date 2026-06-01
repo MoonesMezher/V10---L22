@@ -5,14 +5,23 @@ const { default: mongoose } = require("mongoose");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 const cookies = require("cookie-parser");
-const { limiter } = require("./middlewares/limiter")
+const { limiter } = require("./middlewares/limiter");
+const xssSanitize = require("./middlewares/xss");
+const cors = require("cors");
 
-app.use(limiter)
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
+app.use(limiter);
 app.use(express.json());
 app.use(require("morgan")("dev"));
 app.use(cookies());
+app.use(xssSanitize);
+app.use(express.static("public"));
 
+app.get("/favicon.ico", (_req, res) => res.status(204).end());
 app.get("/api/health", (req, res) => res.status(200).json("API is Healthy"))
 app.use("/api/v1/auth", require("./routes/auth.routes"))
 app.use("/api/v1/users", require("./routes/user.routes"))
@@ -37,3 +46,6 @@ mongoose.connect(process.env.MONGODB_URL)
     .catch(err => {
         console.log("Mongodb Error:", err.message);
     })
+
+// Open Code
+// Kiro: kiro.dev
