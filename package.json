@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "./src/app.js",
   "scripts": {
-    "watch": "nodemon ./src/app.js"
+    "watch": "nodemon ./src/app.js",
+    "admin:seed": "node ./src/scripts/createAdmin.js"
   },
   "keywords": [],
   "author": "",

@@ -14,9 +14,11 @@ router.get("/profile", [optionalAuth], asyncHandler(authController.profile))
 // name, phone, email, password
 router.post("/register", [...registerValidation], asyncHandler(authController.register))
 
-router.post("/login", [loginLimiter, ...loginValidation], asyncHandler(authController.login))
+router.post("/login", [...loginValidation], asyncHandler(authController.login))
 
 router.post("/logout", [auth], asyncHandler(authController.logout))
+
+router.put("/refresh-token", asyncHandler(authController.refreshToken))
 
 router.get("/test", [auth, role(["customer"])], (req, res) => {
     res.status(200).json("DONE");

@@ -3,7 +3,7 @@ const jwtService = require("../utils/jwtService");
 
 const auth = (req, res, next) => {
     try {
-        const token = cookiesService.getData(req, "accessToken");
+        const token = cookiesService.getAccessToken(req)
 
         if(!token) {
             return res.status(403).json({
@@ -11,7 +11,7 @@ const auth = (req, res, next) => {
             })
         }
 
-        const decoded = jwtService.verify(token); 
+        const decoded = jwtService.verifyAccessToken(token); 
 
         req._user = { ...decoded }
 
@@ -20,6 +20,7 @@ const auth = (req, res, next) => {
     
         next();
     } catch (error) {
+        /* refreshTokenService(); */
         return res.status(403).json({
             message: "Not Authoraized",
             error: error.message

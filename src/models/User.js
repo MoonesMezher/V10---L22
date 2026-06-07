@@ -24,17 +24,19 @@ const userSchema = new mongoose.Schema({
     available: Boolean,
     role: {
         type: "String",
-        enum: ["customer", "driver", "resturant-owner"],
+        enum: ["customer", "driver", "resturant-owner", "admin"],
         default: "customer"
     },
-    /* blocked: { // true
+    // block mechanism to sometime if he get failed 5 times
+    blocked: { 
         type: Boolean,
         default: false
     },
-    countTries: { // 1, 2, 3, ,4 , 5
+    failedLoginAttempts: {
         type: Number,
         default: 0
-    } */
+    },
+    lockedUntil: Date
     /* profileId */
 }, { timestamps: true })
 
