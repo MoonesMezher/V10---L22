@@ -22,7 +22,7 @@ class UserController {
         const data = await User.findById(id);
         if(!data) return res.status(404).json("Not Found");
         
-        const { name, phone, email, password, role, address, realtimelocation  } = req.body;
+        const { name, phone, email, password, role, address, realtimelocation, avatar  } = req.body;
         data.name = name ?? data.name;
         data.phone = phone ?? data.phone;
         data.email = email ?? data.email;

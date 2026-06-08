@@ -8,6 +8,7 @@ const cookies = require("cookie-parser");
 const { limiter } = require("./middlewares/limiter");
 const xssSanitize = require("./middlewares/xss");
 const cors = require("cors");
+const path = require("path");
 
 app.use(cors({
     origin: true,
@@ -15,15 +16,18 @@ app.use(cors({
 }));
 
 app.use(limiter);
-app.use(express.json());
+app.use(express.json()); // json data 
+app.use(express.urlencoded({ extended: true })); // files
 app.use(require("morgan")("dev"));
 app.use(cookies());
 app.use(xssSanitize);
 app.use(express.static("public"));
 
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")))
 app.get("/favicon.ico", (_req, res) => res.status(204).end());
 app.get("/api/health", (req, res) => res.status(200).json("API is Healthy"))
 app.use("/api/v1/auth", require("./routes/auth.routes"))
+app.use("/api/v1/uploads", require("./routes/uploads.routes"))
 app.use("/api/v1/users", require("./routes/user.routes"))
 app.use("/api/v1/resturants", require("./routes/resturant.routes"))
 app.use("/api/v1/sections", require("./routes/section.routes"))

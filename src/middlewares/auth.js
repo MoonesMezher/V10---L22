@@ -20,7 +20,7 @@ const auth = (req, res, next) => {
     
         next();
     } catch (error) {
-        /* refreshTokenService(); */
+        /* await refreshTokenService(); */
         return res.status(403).json({
             message: "Not Authoraized",
             error: error.message
