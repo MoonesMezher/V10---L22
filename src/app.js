@@ -34,22 +34,23 @@ app.use("/api/v1/sections", require("./routes/section.routes"))
 app.use("/api/v1/dishs", require("./routes/dish.routes"))
 app.use("/api/v1/orders", require("./routes/order.routes"))
 app.use("/api/v1/rates", require("./routes/rate.routes"))
+app.use("/api/v1/items", require("./routes/item.routes"))
 
 app.use(errorHandler);
 app.use(notFound);
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URL)
+/* mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
-        console.log("Connected to database successfully")
+        console.log("Connected to database successfully") */
         app.listen(PORT, () => {
             console.log("Server is running successfully");
         })
-    })
+    /* })
     .catch(err => {
         console.log("Mongodb Error:", err.message);
-    })
+    }) */
 
 // Open Code
 // Kiro: kiro.dev
